@@ -30,6 +30,11 @@
 		466F8AD71B4F21890057521F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8AD61B4F21890057521F /* CoreGraphics.framework */; };
 		466F8AD91B4F21910057521F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8AD81B4F21910057521F /* CFNetwork.framework */; };
 		466F8ADB1B4F21970057521F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8ADA1B4F21970057521F /* AudioToolbox.framework */; };
+		466F8ADD1B4F22D30057521F /* RMBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466F8ADC1B4F22D30057521F /* RMBUser.swift */; };
+		466F8AE11B4F25AD0057521F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8ADE1B4F25AD0057521F /* FBSDKCoreKit.framework */; };
+		466F8AE21B4F25AD0057521F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8ADF1B4F25AD0057521F /* FBSDKLoginKit.framework */; };
+		466F8AE31B4F25AD0057521F /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8AE01B4F25AD0057521F /* FBSDKShareKit.framework */; };
+		466F8AE61B4F29B10057521F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8AE51B4F29B10057521F /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +75,12 @@
 		466F8AD61B4F21890057521F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		466F8AD81B4F21910057521F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		466F8ADA1B4F21970057521F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		466F8ADC1B4F22D30057521F /* RMBUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMBUser.swift; sourceTree = "<group>"; };
+		466F8ADE1B4F25AD0057521F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		466F8ADF1B4F25AD0057521F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		466F8AE01B4F25AD0057521F /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		466F8AE41B4F27E50057521F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		466F8AE51B4F29B10057521F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,16 +95,20 @@
 				466F8AD31B4F217B0057521F /* MobileCoreServices.framework in Frameworks */,
 				466F8AD11B4F21730057521F /* QuartzCore.framework in Frameworks */,
 				466F8ACF1B4F216B0057521F /* Security.framework in Frameworks */,
+				466F8AE11B4F25AD0057521F /* FBSDKCoreKit.framework in Frameworks */,
 				466F8ACD1B4F21640057521F /* StoreKit.framework in Frameworks */,
 				466F8ACB1B4F215B0057521F /* SystemConfiguration.framework in Frameworks */,
 				466F8AC91B4F21510057521F /* libsqlite3.dylib in Frameworks */,
 				466F8AC71B4F21400057521F /* libz.dylib in Frameworks */,
+				466F8AE31B4F25AD0057521F /* FBSDKShareKit.framework in Frameworks */,
 				466F8AC51B4F21050057521F /* ParseUI.framework in Frameworks */,
+				466F8AE21B4F25AD0057521F /* FBSDKLoginKit.framework in Frameworks */,
 				466F8AC11B4F21050057521F /* Parse.framework in Frameworks */,
 				466F8AC21B4F21050057521F /* ParseCrashReporting.framework in Frameworks */,
 				466F8AC31B4F21050057521F /* ParseFacebookUtils.framework in Frameworks */,
 				466F8AC01B4F21050057521F /* Bolts.framework in Frameworks */,
 				466F8AC41B4F21050057521F /* ParseFacebookUtilsV4.framework in Frameworks */,
+				466F8AE61B4F29B10057521F /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +191,7 @@
 		466F8AB51B4DAA970057521F /* RambleCore */ = {
 			isa = PBXGroup;
 			children = (
+				466F8ADC1B4F22D30057521F /* RMBUser.swift */,
 			);
 			name = RambleCore;
 			sourceTree = "<group>";
@@ -199,6 +215,11 @@
 		466F8AB91B4F20F00057521F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				466F8AE41B4F27E50057521F /* Bridging-Header.h */,
+				466F8AE51B4F29B10057521F /* FacebookSDK.framework */,
+				466F8ADE1B4F25AD0057521F /* FBSDKCoreKit.framework */,
+				466F8ADF1B4F25AD0057521F /* FBSDKLoginKit.framework */,
+				466F8AE01B4F25AD0057521F /* FBSDKShareKit.framework */,
 				466F8ADA1B4F21970057521F /* AudioToolbox.framework */,
 				466F8AD81B4F21910057521F /* CFNetwork.framework */,
 				466F8AD61B4F21890057521F /* CoreGraphics.framework */,
@@ -320,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				466F8ADD1B4F22D30057521F /* RMBUser.swift in Sources */,
 				466F8A971B4DA2A30057521F /* ViewController.swift in Sources */,
 				466F8A951B4DA2A30057521F /* AppDelegate.swift in Sources */,
 			);
@@ -455,6 +477,7 @@
 				INFOPLIST_FILE = Ramble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -469,6 +492,7 @@
 				INFOPLIST_FILE = Ramble/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 			};
 			name = Release;
 		};
