@@ -17,7 +17,6 @@
 		466F8AC11B4F21050057521F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8ABB1B4F21050057521F /* Parse.framework */; };
 		466F8AC21B4F21050057521F /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8ABC1B4F21050057521F /* ParseCrashReporting.framework */; };
 		466F8AC31B4F21050057521F /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8ABD1B4F21050057521F /* ParseFacebookUtils.framework */; };
-		466F8AC41B4F21050057521F /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8ABE1B4F21050057521F /* ParseFacebookUtilsV4.framework */; };
 		466F8AC51B4F21050057521F /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8ABF1B4F21050057521F /* ParseUI.framework */; };
 		466F8AC71B4F21400057521F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8AC61B4F21400057521F /* libz.dylib */; };
 		466F8AC91B4F21510057521F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8AC81B4F21510057521F /* libsqlite3.dylib */; };
@@ -35,6 +34,8 @@
 		466F8AE21B4F25AD0057521F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8ADF1B4F25AD0057521F /* FBSDKLoginKit.framework */; };
 		466F8AE31B4F25AD0057521F /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8AE01B4F25AD0057521F /* FBSDKShareKit.framework */; };
 		466F8AE61B4F29B10057521F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8AE51B4F29B10057521F /* FacebookSDK.framework */; };
+		466F8AE81B4F365A0057521F /* RMBLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466F8AE71B4F365A0057521F /* RMBLoginViewController.swift */; };
+		466F8AEA1B4F3C190057521F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8AE91B4F3C190057521F /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +63,6 @@
 		466F8ABB1B4F21050057521F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		466F8ABC1B4F21050057521F /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
 		466F8ABD1B4F21050057521F /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
-		466F8ABE1B4F21050057521F /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		466F8ABF1B4F21050057521F /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		466F8AC61B4F21400057521F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		466F8AC81B4F21510057521F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -81,6 +81,8 @@
 		466F8AE01B4F25AD0057521F /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		466F8AE41B4F27E50057521F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		466F8AE51B4F29B10057521F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		466F8AE71B4F365A0057521F /* RMBLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMBLoginViewController.swift; sourceTree = "<group>"; };
+		466F8AE91B4F3C190057521F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				466F8AEA1B4F3C190057521F /* MapKit.framework in Frameworks */,
 				466F8ADB1B4F21970057521F /* AudioToolbox.framework in Frameworks */,
 				466F8AD91B4F21910057521F /* CFNetwork.framework in Frameworks */,
 				466F8AD71B4F21890057521F /* CoreGraphics.framework in Frameworks */,
@@ -107,7 +110,6 @@
 				466F8AC21B4F21050057521F /* ParseCrashReporting.framework in Frameworks */,
 				466F8AC31B4F21050057521F /* ParseFacebookUtils.framework in Frameworks */,
 				466F8AC01B4F21050057521F /* Bolts.framework in Frameworks */,
-				466F8AC41B4F21050057521F /* ParseFacebookUtilsV4.framework in Frameworks */,
 				466F8AE61B4F29B10057521F /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				466F8A961B4DA2A30057521F /* ViewController.swift */,
+				466F8AE71B4F365A0057521F /* RMBLoginViewController.swift */,
 				466F8A981B4DA2A30057521F /* Main.storyboard */,
 			);
 			name = RambleUI;
@@ -215,6 +218,7 @@
 		466F8AB91B4F20F00057521F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				466F8AE91B4F3C190057521F /* MapKit.framework */,
 				466F8AE41B4F27E50057521F /* Bridging-Header.h */,
 				466F8AE51B4F29B10057521F /* FacebookSDK.framework */,
 				466F8ADE1B4F25AD0057521F /* FBSDKCoreKit.framework */,
@@ -235,7 +239,6 @@
 				466F8ABB1B4F21050057521F /* Parse.framework */,
 				466F8ABC1B4F21050057521F /* ParseCrashReporting.framework */,
 				466F8ABD1B4F21050057521F /* ParseFacebookUtils.framework */,
-				466F8ABE1B4F21050057521F /* ParseFacebookUtilsV4.framework */,
 				466F8ABF1B4F21050057521F /* ParseUI.framework */,
 			);
 			name = Frameworks;
@@ -341,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				466F8AE81B4F365A0057521F /* RMBLoginViewController.swift in Sources */,
 				466F8ADD1B4F22D30057521F /* RMBUser.swift in Sources */,
 				466F8A971B4DA2A30057521F /* ViewController.swift in Sources */,
 				466F8A951B4DA2A30057521F /* AppDelegate.swift in Sources */,
