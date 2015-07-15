@@ -11,7 +11,6 @@
 		466F8A971B4DA2A30057521F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466F8A961B4DA2A30057521F /* ViewController.swift */; };
 		466F8A9A1B4DA2A30057521F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 466F8A981B4DA2A30057521F /* Main.storyboard */; };
 		466F8A9C1B4DA2A30057521F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 466F8A9B1B4DA2A30057521F /* Images.xcassets */; };
-		466F8A9F1B4DA2A30057521F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 466F8A9D1B4DA2A30057521F /* LaunchScreen.xib */; };
 		466F8AAB1B4DA2A30057521F /* RambleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466F8AAA1B4DA2A30057521F /* RambleTests.swift */; };
 		466F8AC01B4F21050057521F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8ABA1B4F21050057521F /* Bolts.framework */; };
 		466F8AC11B4F21050057521F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8ABB1B4F21050057521F /* Parse.framework */; };
@@ -55,7 +54,6 @@
 		466F8A961B4DA2A30057521F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		466F8A991B4DA2A30057521F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		466F8A9B1B4DA2A30057521F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		466F8A9E1B4DA2A30057521F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		466F8AA41B4DA2A30057521F /* RambleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RambleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		466F8AA91B4DA2A30057521F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		466F8AAA1B4DA2A30057521F /* RambleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RambleTests.swift; sourceTree = "<group>"; };
@@ -149,7 +147,6 @@
 				466F8AB41B4DAA8A0057521F /* RambleKit */,
 				466F8A941B4DA2A30057521F /* AppDelegate.swift */,
 				466F8A9B1B4DA2A30057521F /* Images.xcassets */,
-				466F8A9D1B4DA2A30057521F /* LaunchScreen.xib */,
 				466F8A921B4DA2A30057521F /* Supporting Files */,
 			);
 			path = Ramble;
@@ -325,7 +322,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				466F8A9A1B4DA2A30057521F /* Main.storyboard in Resources */,
-				466F8A9F1B4DA2A30057521F /* LaunchScreen.xib in Resources */,
 				466F8A9C1B4DA2A30057521F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,14 +372,6 @@
 				466F8A991B4DA2A30057521F /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		466F8A9D1B4DA2A30057521F /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				466F8A9E1B4DA2A30057521F /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -474,6 +462,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -489,6 +478,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
