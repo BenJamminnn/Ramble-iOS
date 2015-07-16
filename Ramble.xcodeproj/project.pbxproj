@@ -35,6 +35,8 @@
 		466F8AE61B4F29B10057521F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8AE51B4F29B10057521F /* FacebookSDK.framework */; };
 		466F8AE81B4F365A0057521F /* RMBLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466F8AE71B4F365A0057521F /* RMBLoginViewController.swift */; };
 		466F8AEA1B4F3C190057521F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466F8AE91B4F3C190057521F /* MapKit.framework */; };
+		466F8B221B574F9F0057521F /* Ventography.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 466F8B211B574F9F0057521F /* Ventography.ttf */; };
+		466F8B231B574F9F0057521F /* Ventography.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 466F8B211B574F9F0057521F /* Ventography.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,7 @@
 		466F8AE51B4F29B10057521F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		466F8AE71B4F365A0057521F /* RMBLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMBLoginViewController.swift; sourceTree = "<group>"; };
 		466F8AE91B4F3C190057521F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		466F8B211B574F9F0057521F /* Ventography.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ventography.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +158,7 @@
 		466F8A921B4DA2A30057521F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				466F8B211B574F9F0057521F /* Ventography.ttf */,
 				466F8A931B4DA2A30057521F /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -322,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				466F8A9A1B4DA2A30057521F /* Main.storyboard in Resources */,
+				466F8B221B574F9F0057521F /* Ventography.ttf in Resources */,
 				466F8A9C1B4DA2A30057521F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,6 +335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				466F8B231B574F9F0057521F /* Ventography.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
