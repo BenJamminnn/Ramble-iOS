@@ -10,31 +10,62 @@ import Foundation
 import UIKit
 import Parse
 import FBSDKLoginKit
-import MapKit
 
 class ViewController: UIViewController {
-        override func viewDidLoad() {
-            
+    override func viewDidLoad() {
+        addBackgroundView()
+        addBlurEffect()
+        addTopHeaderView()
+        
         super.viewDidLoad()
     }
     
-    override func viewDidLayoutSubviews() {
+    func addBlurEffect() {
+        self.view.backgroundColor = UIColor.clearColor()
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.bounds
+        self.view.addSubview(blurEffectView) //if you have more UIViews on screen, use insertSubview:belowSubview: to place it underneath the lowest view instead
         
+        //add auto layout constraints so that the blur fills the screen upon rotating device
+        blurEffectView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.view.addConstraint(NSLayoutConstraint(item: blurEffectView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: blurEffectView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: blurEffectView, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: blurEffectView, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Trailing, multiplier: 1, constant: 0))
+    }
+    
+    func addBackgroundView() {
+        let imageView = UIImageView(frame: self.view.frame)
+        imageView.image =  UIImage(named: "RambleBackground")
+        self.view.addSubview(imageView)
+    }
+    
+    func addTopHeaderView() {
+        let topViewFrame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 80)
+        var topView = UIView(frame: topViewFrame)
+        topView.backgroundColor = UIColor(red: 69/255, green: 205/255, blue: 248/255, alpha: 1.0)
         
-        super.viewDidLayoutSubviews()
+        let labelFont = UIFont(name: "VentographyPersonalUseOnly", size: 56)
+        
+        let labelText: String = "Ramble"
+        let labelTextModified = labelText as NSString
+        let size: CGSize = labelTextModified.sizeWithAttributes([NSFontAttributeName: labelFont!])
+
+        let labelFrame = CGRect(x: self.view.center.x - size.width/2, y: topViewFrame.height/1.5 - size.height/2, width: 150, height: 50)
+        var label = UILabel(frame: labelFrame)
+        label.text = labelText
+        label.textColor = UIColor.whiteColor()
+        label.font = labelFont
+        topView.addSubview(label)
+        
+        self.view.addSubview(topView)
+        
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.view.addSubview(self.mapView())
-        self.authenticate()
         super.viewDidAppear(animated)
 
-    }
-    
-    func mapView() -> MKMapView {
-        var mapView = MKMapView(frame: self.view.frame)
-        mapView.mapType = MKMapType.Satellite
-        return mapView
     }
     
     func isFBSessionValid () -> Bool {
@@ -90,4 +121,5 @@ class ViewController: UIViewController {
     
     
 }
+
 
