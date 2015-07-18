@@ -29,8 +29,8 @@ class ViewController: UIViewController {
         self.view.addSubview(blurEffectView) //if you have more UIViews on screen, use insertSubview:belowSubview: to place it underneath the lowest view instead
         UIView.animateWithDuration(1, animations: { () -> Void in
             blurEffectView.alpha = 1.0
-        }) { (finished) -> Void in
             self.presentMenuItems()
+        }) { (finished) -> Void in
         }
         //no need for autolayout yet
         //add auto layout constraints so that the blur fills the screen upon rotating device
@@ -75,28 +75,29 @@ class ViewController: UIViewController {
     }
     
     func presentMenuItems() {
-        let buttonSize = CGSize(width: 200, height: 100)
-        let buttonXCoordinate = view.frame.width/8
+        let buttonSize = CGSize(width: 300, height: 100)
+        let buttonXCoordinate = CGFloat(0)
         let buttonYCoordinate = view.frame.height + 200
+        let buttonStartFrame = CGRect(x:  buttonXCoordinate, y:buttonYCoordinate , width: buttonSize.width, height: buttonSize.height)
         
-        let buttonFrame = CGRect(x:  buttonXCoordinate, y:buttonYCoordinate , width: buttonSize.width, height: buttonSize.height)
-        let chooseDriveButton = UIButton(frame: buttonFrame)
-        chooseDriveButton.setTitle("Choose Drive", forState: UIControlState.Normal)
-        chooseDriveButton.alpha = 0
+        let chooseDriveButton = UIButton(frame: buttonStartFrame)
+        chooseDriveButton.setTitle("CHOOSE YOUR DRIVE", forState: UIControlState.Normal)
         
-        let previousDriveFrame = CGRect(x:buttonXCoordinate , y: buttonYCoordinate, width: buttonSize.width, height: buttonSize.height)
-        let previousDriveButton = UIButton(frame: previousDriveFrame)
-        previousDriveButton.setTitle("Previous Drive", forState: UIControlState.Normal)
-        previousDriveButton.alpha = 0
+        let previousDriveButton = UIButton(frame: buttonStartFrame)
+        previousDriveButton.setTitle("PREVIOUS DRIVE", forState: UIControlState.Normal)
         
-        let addYourOwnFrame = CGRect(x: buttonXCoordinate, y: buttonYCoordinate, width: buttonSize.width, height: buttonSize.height)
-        let addYourOwnButton = UIButton(frame: addYourOwnFrame)
-        addYourOwnButton.setTitle("Add Your Own", forState: UIControlState.Normal)
-        addYourOwnButton.alpha = 0
+        let addYourOwnButton = UIButton(frame: buttonStartFrame)
+        addYourOwnButton.setTitle("ADD YOUR OWN", forState: UIControlState.Normal)
         
-        view.addSubview(previousDriveButton)
-        view.addSubview(addYourOwnButton)
-        view.addSubview(chooseDriveButton)
+        var buttons: [UIButton] = [chooseDriveButton, previousDriveButton, addYourOwnButton]
+        
+        for button in buttons {
+            button.titleLabel?.font =  UIFont(name: "BirchStd", size: 40)
+            button.alpha = 0
+            button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
+            button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+            view.addSubview(button)
+        }
         
         UIView.animateWithDuration(1.5, animations: { () -> Void in
             chooseDriveButton.alpha = 1.0

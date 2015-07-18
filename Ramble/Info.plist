@@ -52,6 +52,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Ventography.ttf</string>
+		<string>BirchStd.otf</string>
 	</array>
 </dict>
 </plist>
