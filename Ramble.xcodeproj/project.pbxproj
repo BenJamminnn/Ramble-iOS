@@ -41,6 +41,7 @@
 		466F8B631B5B03C90057521F /* BirchStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = 466F8B621B5B03C90057521F /* BirchStd.otf */; };
 		466F8B651B5C55D90057521F /* ChooseDriveOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466F8B641B5C55D90057521F /* ChooseDriveOptionsViewController.swift */; };
 		466F8B671B5C56700057521F /* UIViewBackgroundExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466F8B661B5C56700057521F /* UIViewBackgroundExtension.swift */; };
+		466F8B691B5D88DF0057521F /* RMBStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466F8B681B5D88DF0057521F /* RMBStarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		466F8B621B5B03C90057521F /* BirchStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = BirchStd.otf; path = RambleTests/BirchStd.otf; sourceTree = SOURCE_ROOT; };
 		466F8B641B5C55D90057521F /* ChooseDriveOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseDriveOptionsViewController.swift; sourceTree = "<group>"; };
 		466F8B661B5C56700057521F /* UIViewBackgroundExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewBackgroundExtension.swift; sourceTree = "<group>"; };
+		466F8B681B5D88DF0057521F /* RMBStarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMBStarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
