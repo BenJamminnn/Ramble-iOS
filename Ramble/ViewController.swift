@@ -271,14 +271,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 10
-    }
-
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let attributes = [NSFontAttributeName : UIFont(name: "BirchStd", size: 32.0)!]
         if row < pickerData.count - 1 {
@@ -287,6 +279,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
         return NSAttributedString(string: String("Out of bounds"))
     }
+
 }
 
 
