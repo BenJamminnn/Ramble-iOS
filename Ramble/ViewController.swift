@@ -10,15 +10,21 @@ import Foundation
 import UIKit
 import Parse
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     private var chooseDriveButtonMenuOpen = false
     private var subMenuItems: Array <UIButton> = []
     
+    private var pickerView = UIPickerView()
+    private let pickerData = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60]
+    private var pickerViewToolBar = UIToolbar()
     
     override func viewDidLoad() {
         generateSubMenuItems()
         setUpSubviews()
+        
+        setUpPicker()
+        
         super.viewDidLoad()
     }
     
@@ -89,6 +95,8 @@ class ViewController: UIViewController {
         }, completion: nil )
     }
     
+    //MARK: Choose Drive Selected
+    
     func chooseDriveSelected(sender: UIButton) {
        // self.presentViewController(ChooseDriveOptionsViewController(), animated: true, completion: nil)
         //1 animate choose drive up
@@ -116,7 +124,7 @@ class ViewController: UIViewController {
     }
     
     func removeSubMenuItems() {
-        UIView.animateWithDuration(0.6, animations: { () -> Void in
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
             for label in self.subMenuItems {
                 label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y + 100, label.frame.width, label.frame.height)
                 label.alpha = 0
@@ -128,6 +136,7 @@ class ViewController: UIViewController {
                     
                 }
         }
+        dismissPickerView()
     }
     
     func presentSubMenuItems() {
@@ -137,13 +146,12 @@ class ViewController: UIViewController {
             view.addSubview(label)
         }
         
-        UIView.animateWithDuration(1, animations: { () -> Void in
+        UIView.animateWithDuration(1.0, animations: { () -> Void in
             for label in self.subMenuItems {
                 label.alpha = 1.0
             }
         })
     }
-    
     
     func generateSubMenuItems() {
         let font = UIFont(name: "BirchStd", size: 32.0)
@@ -157,23 +165,127 @@ class ViewController: UIViewController {
         
         let rangeLabel = UIButton(frame: rangeLabelFrame)
         rangeLabel.setTitle("RANGE", forState: UIControlState.Normal)
+        let rangeValueLabel = UIButton(frame: CGRect(x: view.frame.width - 350, y: rangeLabelFrame.origin.y, width: 300, height: 100))
+        rangeValueLabel.setTitle("20", forState: UIControlState.Normal)
+        rangeValueLabel.addTarget(self, action: Selector("presentPickerView:"), forControlEvents: UIControlEvents.TouchUpInside)
+        rangeValueLabel.tag = 0
         
         let ratingLabel = UIButton(frame: ratingLabelFrame)
         ratingLabel.setTitle("RATING", forState: UIControlState.Normal)
+        let ratingValueLabel = UIButton(frame: CGRectMake(view.frame.width - 350, ratingLabelFrame.origin.y, 300, 100))
+        //TODO: add star View
         
         let lengthLabel = UIButton(frame: lengthLabelFrame)
         lengthLabel.setTitle("LENGTH", forState: UIControlState.Normal)
         
+        let lengthValueLabel = UIButton(frame: CGRectMake(view.frame.width - 350, lengthLabelFrame.origin.y, 300, 100))
+        lengthValueLabel.setTitle("15", forState: UIControlState.Normal)
+        lengthValueLabel.addTarget(self, action: Selector("presentPickerView:"), forControlEvents: UIControlEvents.TouchUpInside)
+        lengthValueLabel.tag = 1
+//        var lengthValueTextField: UITextField = textFieldWithText("15", frame: CGRectMake(view.frame.width - 350, lengthLabelFrame.origin.y, 300, 100))
+//        lengthValueTextField.addTarget(self, action: Selector("presentPickerView"), forControlEvents: UIControlEvents.TouchUpInside)
+//        lengthValueTextField.inputView = pickerView
+//    
         
-        let labels = [rangeLabel, ratingLabel, lengthLabel]
+        let labelsLeft = [rangeLabel, ratingLabel, lengthLabel]
+        let labelsRight = [rangeValueLabel, ratingValueLabel, lengthValueLabel]
         
-        for label in labels {
+        
+        for label in labelsLeft {
             label.contentEdgeInsets = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 0)
             label.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
             label.titleLabel?.font = font
             label.alpha = 0.0
         }
-        subMenuItems = labels
+        
+        for label in labelsRight {
+            label.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Right
+            label.titleLabel?.font = font
+            label.alpha = 0.0
+        }
+        subMenuItems = labelsLeft + labelsRight
+    }
+    
+    //MARK: Picker View
+    
+    func presentPickerView(sender: UIButton) {
+        if pickerView.superview == nil {
+            view.addSubview(pickerView)
+            view.addSubview(pickerViewToolBar)
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.pickerView.frame = CGRectMake(0, self.view.frame.height - 200, self.view.frame.width, 300)
+                self.pickerViewToolBar.frame = CGRectMake(0, self.view.frame.height - 200, self.view.frame.width, 44)
+            }) { (finished) -> Void in
+            }
+            pickerView.tag = sender.tag
+        }
+        
+    }
+    
+    func setUpPicker() {
+        let pickerFrame = CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: 300)
+        pickerView = UIPickerView(frame: pickerFrame)
+        pickerView.showsSelectionIndicator = true
+        pickerView.backgroundColor = UIColor.whiteColor()
+        pickerView.alpha = 0.6
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        pickerView.tag = 3
+        pickerViewToolBar = pickerToolBar()
+        
+    }
+    
+    func pickerToolBar() -> UIToolbar {
+        var toolbar = UIToolbar()
+        toolbar.frame = CGRectMake(pickerView.frame.origin.x, view.frame.height, view.frame.width, pickerView.frame.height)
+        toolbar.barStyle = .Default
+        toolbar.translucent = true
+        toolbar.backgroundColor = UIColor.clearColor()
+        toolbar.tintColor = UIColor.blackColor()
+        toolbar.alpha = 0.6
+        toolbar.sizeToFit()
+
+        var doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("dismissPickerView"))
+        
+        toolbar.setItems([doneButton], animated: true)
+        toolbar.userInteractionEnabled = true
+        return toolbar
+    }
+    
+    func dismissPickerView() {
+        let chosenIndex = pickerView.selectedRowInComponent(0)
+        println("dismissing picker view, selected row:\(chosenIndex)")
+        
+        let animationFrame = CGRectMake(self.pickerView.frame.origin.x, self.view.frame.height, self.view.frame.width, self.pickerView.frame.height)
+
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.pickerView.frame = animationFrame
+            self.pickerViewToolBar.frame = animationFrame
+        }) { (finished) -> Void in
+            self.pickerView.removeFromSuperview()
+            self.pickerViewToolBar.removeFromSuperview()
+        }
+        let mileValue = pickerData[chosenIndex]
+        let updatedButton = pickerView.tag == 0 ? subMenuItems[3] : subMenuItems[5]
+        updatedButton.setTitle(String(mileValue), forState: UIControlState.Normal)
+        
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 10
+    }
+
+    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let attributes = [NSFontAttributeName : UIFont(name: "BirchStd", size: 32.0)!]
+        if row < pickerData.count - 1 {
+            let attributedTitle = NSAttributedString(string: String(pickerData[row]), attributes: attributes)
+            return attributedTitle
+        }
+        return NSAttributedString(string: String("Out of bounds"))
     }
 }
 

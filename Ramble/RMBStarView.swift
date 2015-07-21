@@ -56,7 +56,7 @@ class RMBStarView: UIView {
     
     func fillStars(numberOfStars: Int) {
         for i in 0...numberOfStars {
-            stars[i].image = starFilledImage  
+            stars[i].image = starFilledImage
         }
     }
 }
