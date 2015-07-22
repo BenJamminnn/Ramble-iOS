@@ -13,18 +13,21 @@ import Parse
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     private var chooseDriveButtonMenuOpen = false
-    private var subMenuItems: Array <UIButton> = []
+    private var subMenuItems: [UIButton] = []
+    private var menuItems: [UIButton] = []
     
     private var pickerView = UIPickerView()
     private let pickerData = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60]
     private var pickerViewToolBar = UIToolbar()
     
+    private var rambleButton: UIButton? = nil
+    private var isRambleButtonPresented: Bool = false
     override func viewDidLoad() {
         generateSubMenuItems()
         setUpSubviews()
         
         setUpPicker()
-        
+        rambleButton = generateRambleButton()
         super.viewDidLoad()
     }
     
@@ -81,6 +84,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
             button.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
             view.addSubview(button)
+            menuItems.append(button)
         }
         
         UIView.animateWithDuration(1.5, animations: { () -> Void in
@@ -98,10 +102,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //MARK: Choose Drive Selected
     
     func chooseDriveSelected(sender: UIButton) {
-       // self.presentViewController(ChooseDriveOptionsViewController(), animated: true, completion: nil)
-        //1 animate choose drive up
-        //2 create new labels/buttons 
-        //on completion, alpha = 1 
+
         if chooseDriveButtonMenuOpen {
             //close
             UIView.animateWithDuration(0.8, animations: { () -> Void in
@@ -137,6 +138,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 }
         }
         dismissPickerView()
+        removeRambleButton()
     }
     
     func presentSubMenuItems() {
@@ -151,6 +153,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 label.alpha = 1.0
             }
         })
+        if isRambleButtonPresented == false {
+            presentLetsRambleButton()
+        }
     }
     
     func generateSubMenuItems() {
@@ -166,7 +171,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let rangeLabel = UIButton(frame: rangeLabelFrame)
         rangeLabel.setTitle("RANGE", forState: UIControlState.Normal)
         let rangeValueLabel = UIButton(frame: CGRect(x: view.frame.width - 350, y: rangeLabelFrame.origin.y, width: 300, height: 100))
-        rangeValueLabel.setTitle("20", forState: UIControlState.Normal)
+        rangeValueLabel.setTitle("-", forState: UIControlState.Normal)
         rangeValueLabel.addTarget(self, action: Selector("presentPickerView:"), forControlEvents: UIControlEvents.TouchUpInside)
         rangeValueLabel.tag = 0
         
@@ -179,10 +184,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         lengthLabel.setTitle("LENGTH", forState: UIControlState.Normal)
         
         let lengthValueLabel = UIButton(frame: CGRectMake(view.frame.width - 350, lengthLabelFrame.origin.y, 300, 100))
-        lengthValueLabel.setTitle("15", forState: UIControlState.Normal)
+        lengthValueLabel.setTitle("-", forState: UIControlState.Normal)
         lengthValueLabel.addTarget(self, action: Selector("presentPickerView:"), forControlEvents: UIControlEvents.TouchUpInside)
         lengthValueLabel.tag = 1
-//        var lengthValueTextField: UITextField = textFieldWithText("15", frame: CGRectMake(view.frame.width - 350, lengthLabelFrame.origin.y, 300, 100))
+//        var lengthValueTextField: UITextField = textFieldWithText("15", frame: CGRectMake(view.frame.width - 350, lengthLabelFrame.origin.y, 300, 100)) 73, 210, 87
 //        lengthValueTextField.addTarget(self, action: Selector("presentPickerView"), forControlEvents: UIControlEvents.TouchUpInside)
 //        lengthValueTextField.inputView = pickerView
 //    
@@ -208,11 +213,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     //MARK: Let's Ramble Button
     
-    func rambleButton() -> UIButton {
-        let buttonFrame = CGRectMake(0, view.frame.height - view.frame.height/10, view.frame.width, view.frame.height/10)
-        let button = UIButton(frame: view.frame)
+    func generateRambleButton() -> UIButton {
+        let buttonFrame = CGRectMake(0, view.frame.height, view.frame.width, 100)
+        let button = UIButton(frame: buttonFrame)
         button.backgroundColor = UIColor(red: 69/255, green: 205/255, blue: 248/255, alpha: 1.0)
         button.titleLabel?.textColor = UIColor.whiteColor()
+        button.titleLabel?.frame = buttonFrame
         let fontSize: CGFloat = view.frame.height < 667 ? 42 : 56
         let labelFont = UIFont(name: "VentographyPersonalUseOnly", size: fontSize)
 
@@ -221,8 +227,52 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return button
     }
     
+    func removeRambleButton() {
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            for menuElement in self.subMenuItems + self.menuItems {
+                menuElement.frame = CGRect(x: menuElement.frame.origin.x, y: menuElement.frame.origin.y + 100, width: menuElement.frame.size.width, height: menuElement.frame.size.height)
+            }
+            self.rambleButton!.frame = CGRect(x: self.rambleButton!.frame.origin.x, y: self.rambleButton!.frame.origin.y + 100, width: self.rambleButton!.frame.width, height: self.rambleButton!.frame.height)
+        }) { (finished) -> Void in
+            rambleButton?.removeFromSuperview()
+        }
+        isRambleButtonPresented = false
+    }
+    
+    func changeButtonColor() {
+        let greenBackground = UIColor(red: 73/255, green: 210/255, blue: 87/255, alpha: 1.0)
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.rambleButton?.backgroundColor = greenBackground
+        })
+    }
+    
     func presentLetsRambleButton() {
-        view.addSubview(rambleButton())
+        if isRambleButtonPresented == true {
+            return
+        }
+        var shouldBeGreen: Bool = true
+        for subMenuItem in subMenuItems {
+            if subMenuItem.titleLabel?.text == "-" {
+                shouldBeGreen = false
+            }
+        }
+        
+        if shouldBeGreen {
+            changeButtonColor()
+        }
+
+        view.addSubview(rambleButton!)
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            for menuElement in self.subMenuItems + self.menuItems {
+                menuElement.frame = CGRect(x: menuElement.frame.origin.x, y: menuElement.frame.origin.y - 100, width: menuElement.frame.size.width, height: menuElement.frame.size.height)
+            }
+            self.rambleButton!.frame = CGRect(x: self.rambleButton!.frame.origin.x, y: self.rambleButton!.frame.origin.y - 100, width: self.rambleButton!.frame.width, height: self.rambleButton!.frame.height)
+        }) { (finished) -> Void in
+        }
+        
+        isRambleButtonPresented = true
     }
     
     //MARK: Picker View
@@ -287,7 +337,17 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let mileValue = pickerData[chosenIndex]
         let updatedButton = pickerView.tag == 0 ? subMenuItems[3] : subMenuItems[5]
         updatedButton.setTitle(String(mileValue), forState: UIControlState.Normal)
-        presentLetsRambleButton()
+        
+        var shouldBeGreen: Bool = true
+        for subMenuItem in subMenuItems {
+            if subMenuItem.titleLabel?.text == "-" {
+                shouldBeGreen = false
+            }
+        }
+        
+        if shouldBeGreen {
+            changeButtonColor()
+        }
     }
     
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
