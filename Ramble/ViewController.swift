@@ -296,7 +296,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         pickerView = UIPickerView(frame: pickerFrame)
         pickerView.showsSelectionIndicator = true
         pickerView.backgroundColor = UIColor.whiteColor()
-        pickerView.alpha = 0.6
+        pickerView.alpha = 1.0
         pickerView.delegate = self
         pickerView.dataSource = self
         pickerView.tag = 3
