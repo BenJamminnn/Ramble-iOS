@@ -206,6 +206,25 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         subMenuItems = labelsLeft + labelsRight
     }
     
+    //MARK: Let's Ramble Button
+    
+    func rambleButton() -> UIButton {
+        let buttonFrame = CGRectMake(0, view.frame.height - view.frame.height/10, view.frame.width, view.frame.height/10)
+        let button = UIButton(frame: view.frame)
+        button.backgroundColor = UIColor(red: 69/255, green: 205/255, blue: 248/255, alpha: 1.0)
+        button.titleLabel?.textColor = UIColor.whiteColor()
+        let fontSize: CGFloat = view.frame.height < 667 ? 42 : 56
+        let labelFont = UIFont(name: "VentographyPersonalUseOnly", size: fontSize)
+
+        button.setAttributedTitle(NSAttributedString(string: "Let's Ramble", attributes: [NSFontAttributeName : labelFont!]), forState: UIControlState.Normal)
+        button.alpha = 1.0
+        return button
+    }
+    
+    func presentLetsRambleButton() {
+        view.addSubview(rambleButton())
+    }
+    
     //MARK: Picker View
     
     func presentPickerView(sender: UIButton) {
@@ -268,7 +287,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let mileValue = pickerData[chosenIndex]
         let updatedButton = pickerView.tag == 0 ? subMenuItems[3] : subMenuItems[5]
         updatedButton.setTitle(String(mileValue), forState: UIControlState.Normal)
-        
+        presentLetsRambleButton()
     }
     
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
