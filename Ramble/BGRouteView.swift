@@ -70,6 +70,7 @@ class BGRouteView: UIView {
         }
     }
     
+    //random mileage from 0-70, just for show
     func addAnnotationToView(view: UIView) -> UIView! {
         let font = UIFont(name: "BirchStd", size: 32.0)
         let lengthLabelFrame = CGRect(x: 10, y: view.frame.height/3, width: view.frame.width, height: view.frame.height/2)

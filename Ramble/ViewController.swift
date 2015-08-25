@@ -195,15 +195,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         rangeValueLabel.addTarget(self, action: Selector("presentPickerView:"), forControlEvents: UIControlEvents.TouchUpInside)
         rangeValueLabel.tag = 0
         
+        //Still prototyping RMBStarView
         //RATING LABEL AND VALUE -- STARVIEW
-        let ratingLabel = UIButton(frame: ratingLabelFrame)
-        ratingLabel.setTitle("RATING", forState: UIControlState.Normal)
-        
-        let ratingValueLabelFrame =  CGRectMake(rangeValueLabel.frame.origin.x, ratingLabelFrame.origin.y, 100, 50)
-        let ratingValueLabelView = RMBStarView(frame: ratingValueLabelFrame)
-        let ratingValueLabel = UIButton(frame: ratingValueLabelFrame)
-        ratingValueLabel.setImage(UIImage.imageWithView(ratingValueLabelView), forState: UIControlState.Normal)
-        
+//        let ratingLabel = UIButton(frame: ratingLabelFrame)
+//        ratingLabel.setTitle("RATING", forState: UIControlState.Normal)
+//        
+//        let ratingValueLabelFrame =  CGRectMake(rangeValueLabel.frame.origin.x, ratingLabelFrame.origin.y, 100, 50)
+//        let ratingValueLabelView = RMBStarView(frame: ratingValueLabelFrame)
+//        let ratingValueLabel = UIButton(frame: ratingValueLabelFrame)
+//        ratingValueLabel.setImage(UIImage.imageWithView(ratingValueLabelView), forState: UIControlState.Normal)
+//        
         
         //LENGTH LABEL AND VALUE
         let lengthLabel = UIButton(frame: lengthLabelFrame)
@@ -214,7 +215,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         lengthValueLabel.addTarget(self, action: Selector("presentPickerView:"), forControlEvents: UIControlEvents.TouchUpInside)
         lengthValueLabel.tag = 1
 
-        let labelsLeft = [rangeLabel, ratingLabel, lengthLabel]
+        let labelsLeft = [rangeLabel, lengthLabel]
         let labelsRight = [rangeValueLabel, lengthValueLabel]
         
         
@@ -363,7 +364,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             self.pickerViewToolBar.removeFromSuperview()
         }
         let mileValue = pickerData[chosenIndex]
-        let updatedButton = pickerView.tag == 0 ? subMenuItems[3] : subMenuItems[4]
+        let updatedButton = pickerView.tag == 0 ? subMenuItems[2] : subMenuItems[3]
         updatedButton.setTitle(String(mileValue), forState: UIControlState.Normal)
         
         var shouldBeGreen: Bool = true
@@ -388,5 +389,18 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
 
 }
+
+extension ViewController : UIPickerViewDataSource  {
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 10
+    }
+    
+}
+
 
 
