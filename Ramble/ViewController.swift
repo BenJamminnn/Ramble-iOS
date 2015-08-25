@@ -22,6 +22,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     private var rambleButton: UIButton? = nil
     private var isRambleButtonPresented: Bool = false
+    
     override func viewDidLoad() {
         generateSubMenuItems()
         setUpSubviews()
@@ -41,6 +42,18 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         view.addSubview(UIView.headerViewWithName("Ramble", font: labelFont))
 
 
+    }
+    
+    private func removeAllSubviews() {
+        for subView in self.menuItems + self.subMenuItems {
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                subView.alpha = 0.0
+                    }, completion: { (finished) -> Void in
+                        subView.removeFromSuperview()
+                })
+        }
+        removeRambleButton()
+        self.view.addSubview(BGRouteView(numberOfRoutes: 8))
     }
     
     func addBlurEffect() {
@@ -162,38 +175,47 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let font = UIFont(name: "BirchStd", size: 32.0)
         
         let screenHeight = UIScreen.mainScreen().bounds.height
+        let defaultLabelWidth: CGFloat = 200.0
+        let defaultLabelHeight: CGFloat = 50.0
         
-        let rangeLabelFrame = CGRect(x: 0, y: screenHeight/2.4, width: 300, height: 100)
-        let ratingLabelFrame = CGRect(x: 0, y: screenHeight/2.05, width: 300, height: 100)
-        let lengthLabelFrame = CGRect(x: 0, y: screenHeight/1.75, width: 300, height: 100)
+        let rangeLabelFrame = CGRect(x: 0, y: screenHeight/2.2, width: defaultLabelWidth, height: defaultLabelHeight)
+        let ratingLabelFrame = CGRect(x: 0, y: screenHeight/1.88, width: defaultLabelWidth, height: defaultLabelHeight)
+        let lengthLabelFrame = CGRect(x: 0, y: screenHeight/1.65, width: defaultLabelWidth, height: defaultLabelHeight)
         
+        let rangeValueFrame = CGRect(x: view.frame.width/3.0, y: rangeLabelFrame.origin.y, width: defaultLabelWidth, height: defaultLabelHeight)
+        let starViewFrame = CGRectZero
+        let lengthValueFrame = CGRect(x: view.frame.width/3.0, y: lengthLabelFrame.origin.y, width: defaultLabelWidth, height: defaultLabelHeight)
         
+        //RANGE LABEL AND VALUE
         let rangeLabel = UIButton(frame: rangeLabelFrame)
         rangeLabel.setTitle("RANGE", forState: UIControlState.Normal)
-        let rangeValueLabel = UIButton(frame: CGRect(x: view.frame.width - 350, y: rangeLabelFrame.origin.y, width: 300, height: 100))
+        
+        let rangeValueLabel = UIButton(frame: rangeValueFrame)
         rangeValueLabel.setTitle("-", forState: UIControlState.Normal)
         rangeValueLabel.addTarget(self, action: Selector("presentPickerView:"), forControlEvents: UIControlEvents.TouchUpInside)
         rangeValueLabel.tag = 0
         
+        //RATING LABEL AND VALUE -- STARVIEW
         let ratingLabel = UIButton(frame: ratingLabelFrame)
         ratingLabel.setTitle("RATING", forState: UIControlState.Normal)
-        let ratingValueLabel = UIButton(frame: CGRectMake(view.frame.width - 350, ratingLabelFrame.origin.y, 300, 100))
-        //TODO: add star View
         
+        let ratingValueLabelFrame =  CGRectMake(rangeValueLabel.frame.origin.x, ratingLabelFrame.origin.y, 100, 50)
+        let ratingValueLabelView = RMBStarView(frame: ratingValueLabelFrame)
+        let ratingValueLabel = UIButton(frame: ratingValueLabelFrame)
+        ratingValueLabel.setImage(UIImage.imageWithView(ratingValueLabelView), forState: UIControlState.Normal)
+        
+        
+        //LENGTH LABEL AND VALUE
         let lengthLabel = UIButton(frame: lengthLabelFrame)
         lengthLabel.setTitle("LENGTH", forState: UIControlState.Normal)
         
-        let lengthValueLabel = UIButton(frame: CGRectMake(view.frame.width - 350, lengthLabelFrame.origin.y, 300, 100))
+        let lengthValueLabel = UIButton(frame: lengthValueFrame)
         lengthValueLabel.setTitle("-", forState: UIControlState.Normal)
         lengthValueLabel.addTarget(self, action: Selector("presentPickerView:"), forControlEvents: UIControlEvents.TouchUpInside)
         lengthValueLabel.tag = 1
-//        var lengthValueTextField: UITextField = textFieldWithText("15", frame: CGRectMake(view.frame.width - 350, lengthLabelFrame.origin.y, 300, 100)) 73, 210, 87
-//        lengthValueTextField.addTarget(self, action: Selector("presentPickerView"), forControlEvents: UIControlEvents.TouchUpInside)
-//        lengthValueTextField.inputView = pickerView
-//    
-        
+
         let labelsLeft = [rangeLabel, ratingLabel, lengthLabel]
-        let labelsRight = [rangeValueLabel, ratingValueLabel, lengthValueLabel]
+        let labelsRight = [rangeValueLabel, lengthValueLabel]
         
         
         for label in labelsLeft {
@@ -214,16 +236,18 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //MARK: Let's Ramble Button
     
     func generateRambleButton() -> UIButton {
-        let buttonFrame = CGRectMake(0, view.frame.height, view.frame.width, 100)
+        let buttonFrame = CGRectMake(0, view.frame.height, view.frame.width, 80)
         let button = UIButton(frame: buttonFrame)
         button.backgroundColor = UIColor(red: 69/255, green: 205/255, blue: 248/255, alpha: 1.0)
         button.titleLabel?.textColor = UIColor.whiteColor()
         button.titleLabel?.frame = buttonFrame
         let fontSize: CGFloat = view.frame.height < 667 ? 42 : 56
         let labelFont = UIFont(name: "VentographyPersonalUseOnly", size: fontSize)
-
+        button.titleLabel?.frame = buttonFrame
         button.setAttributedTitle(NSAttributedString(string: "Let's Ramble", attributes: [NSFontAttributeName : labelFont!]), forState: UIControlState.Normal)
+        button.showsTouchWhenHighlighted = true
         button.alpha = 1.0
+        button.addTarget(self, action: Selector("letsRambleTapped"), forControlEvents: UIControlEvents.TouchUpInside)
         return button
     }
     
@@ -266,13 +290,17 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             for menuElement in self.subMenuItems + self.menuItems {
-                menuElement.frame = CGRect(x: menuElement.frame.origin.x, y: menuElement.frame.origin.y - 100, width: menuElement.frame.size.width, height: menuElement.frame.size.height)
+                menuElement.frame = CGRect(x: menuElement.frame.origin.x, y: menuElement.frame.origin.y - 80, width: menuElement.frame.size.width, height: menuElement.frame.size.height)
             }
-            self.rambleButton!.frame = CGRect(x: self.rambleButton!.frame.origin.x, y: self.rambleButton!.frame.origin.y - 100, width: self.rambleButton!.frame.width, height: self.rambleButton!.frame.height)
+            self.rambleButton!.frame = CGRect(x: self.rambleButton!.frame.origin.x, y: self.rambleButton!.frame.origin.y - 80, width: self.rambleButton!.frame.width, height: self.rambleButton!.frame.height)
         }) { (finished) -> Void in
         }
         
         isRambleButtonPresented = true
+    }
+    
+    func letsRambleTapped() {
+        removeAllSubviews()
     }
     
     //MARK: Picker View
@@ -335,7 +363,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             self.pickerViewToolBar.removeFromSuperview()
         }
         let mileValue = pickerData[chosenIndex]
-        let updatedButton = pickerView.tag == 0 ? subMenuItems[3] : subMenuItems[5]
+        let updatedButton = pickerView.tag == 0 ? subMenuItems[3] : subMenuItems[4]
         updatedButton.setTitle(String(mileValue), forState: UIControlState.Normal)
         
         var shouldBeGreen: Bool = true

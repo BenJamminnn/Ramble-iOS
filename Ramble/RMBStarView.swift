@@ -9,15 +9,18 @@
 
 class RMBStarView: UIView {
     
-    private let starFilledImage = UIImage(named: "")
-    private let starEmptyImage = UIImage(named: "")
+    private let starFilledImage = UIImage(named: "StarFilled")
+    private let starEmptyImage = UIImage(named: "StarEmpty")
     
     private var stars: Array<UIImageView> = []
     private var starXIndexes: Array<CGFloat> = []
     
     override init(frame: CGRect) {
-
+        
         super.init(frame: frame)
+        backgroundColor = UIColor.clearColor()
+        generateStars()
+
     }
 
     func generateStars() {
